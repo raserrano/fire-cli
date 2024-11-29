@@ -1,0 +1,27 @@
+{
+  "name": "fire-cli",
+  "version": "0.0.1",
+  "description": "Track income and expenses on the CLI to get a wall chart to calculate #FIRE like #YMOYL style",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raserrano/fire-cli.git"
+  },
+  "keywords": [
+    "fire",
+    "cli",
+    "ymoyl",
+    "money",
+    "finance",
+    "wallchart"
+  ],
+  "author": "raserrano",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/raserrano/fire-cli/issues"
+  },
+  "homepage": "https://github.com/raserrano/fire-cli#readme"
+}
