@@ -4,7 +4,9 @@
   "description": "Track income and expenses on the CLI to get a wall chart to calculate #FIRE like #YMOYL style",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cucumber-js",
+    "lint": "standard",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -23,5 +25,18 @@
   "bugs": {
     "url": "https://github.com/raserrano/fire-cli/issues"
   },
-  "homepage": "https://github.com/raserrano/fire-cli#readme"
+  "homepage": "https://github.com/raserrano/fire-cli#readme",
+  "dependencies": {
+    "@cucumber/cucumber": "^11.1.0",
+    "commander": "^12.1.0",
+    "commitlint": "^19.6.0",
+    "husky": "^9.1.7",
+    "lowdb": "^7.0.1",
+    "npm-check-updates": "^17.1.11",
+    "standard": "^17.1.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.6.0",
+    "@commitlint/config-conventional": "^19.6.0"
+  }
 }
