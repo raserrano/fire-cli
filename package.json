@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Track income and expenses on the CLI to get a wall chart to calculate #FIRE like #YMOYL style",
   "main": "index.js",
+  "bin": {
+    "fire-cli":"bin/cmd.js"
+  },
   "scripts": {
     "test": "cucumber-js",
     "lint": "standard . --fix",
