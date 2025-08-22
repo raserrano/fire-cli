@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { Command } from 'commander'
 // import { update, add, listCategories, listCategoryItems } from "../src/utils.js";
+import { Expense } from '#models/money_event.js'
 
 // Create a new Command Program
 const program = new Command()
@@ -12,6 +13,10 @@ const usage = (msg = description) => {
   console.log(`\n${msg}\n`)
 }
 
+const addEvent = (options) => {
+  const event = new Expense(options.amount)
+}
+
 // Create a new Program
 program
   .name('fire-cli') // Set the name of the program
@@ -20,18 +25,13 @@ program
 
 // Create a command for listing categories by IDs
 program
-  // Set the command name
   .command('add')
-  // Set the command description
   .description('Add money income/spend and category')
-  // Set the category to be required
-  .argument('<CATEGORY>', 'Product Category')
-  // Set the argument AMOUNT to be required
-  .argument('<AMOUNT>', 'Money')
-  // Set the action to be executed when the command is run
-  .action(
-    console.log('income registed for category')
-  )
+  .option('-a, --amount', 'Amount')
+  .option('-c, --category', 'Category')
+  .action(addEvent(program.opts()))
 
 // Parse the arguments from process.argv
 program.parse()
+
+const options = program.opts()
