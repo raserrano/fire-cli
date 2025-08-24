@@ -4,7 +4,7 @@
   "description": "Track income and expenses on the CLI to get a wall chart to calculate #FIRE like #YMOYL style",
   "main": "index.js",
   "type": "module",
-  "imports":{
+  "imports": {
     "#models/*.js": "./app/models/*.js"
   },
   "bin": {
@@ -43,6 +43,7 @@
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "c8": "^10.1.3",
+    "chai": "^6.0.1",
     "husky": "^9.1.7",
     "npm-check-updates": "^18.0.2",
     "standard": "^17.1.2"

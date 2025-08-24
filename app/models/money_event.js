@@ -40,20 +40,18 @@ class MoneyEvent {
   }
 
   save () {
-
+    return `${this.type.toLowerCase()} registered for category '${this.getCategory()}'`
   }
 }
 
 export class Expense extends MoneyEvent {
-  constructor (amount, type, category = 'Default', tags = []) {
-    super(amount, type, new Date(), category, tags)
-    this.type = 'Expense'
+  constructor (amount, category = 'Default', tags = []) {
+    super(amount, 'Expense', new Date(), category, tags)
   }
 }
 
 export class Income extends MoneyEvent {
-  constructor (amount, type, category = 'Default', tags = []) {
-    super(amount, type, new Date(), category, tags)
-    this.type = 'Income'
+  constructor (amount, category = 'Default', tags = []) {
+    super(amount, 'Income', new Date(), category, tags)
   }
 }

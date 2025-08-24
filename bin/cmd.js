@@ -13,25 +13,32 @@ const usage = (msg = description) => {
   console.log(`\n${msg}\n`)
 }
 
-const addEvent = (options) => {
-  const event = new Expense(options.amount)
-}
-
 // Create a new Program
 program
   .name('fire-cli') // Set the name of the program
   .description(description) // Set the description
-  .version('1.0.0') // Set the version
+  .version('0.0.1', '-v, --version', 'output the current version');
 
-// Create a command for listing categories by IDs
 program
   .command('add')
   .description('Add money income/spend and category')
-  .option('-a, --amount', 'Amount')
-  .option('-c, --category', 'Category')
-  .action(addEvent(program.opts()))
+  .argument('<number>', 'Amount to add as income')
+  .option('-c, --category <string>', 'Category')
+  .action((amount, options) => {
+    const event = (options.category !== null)
+      ? new Expense(amount, options.category)
+      : new Expense(amount)
+    event.save()
+  })
+
+program
+  .command('report')
+  .description('Generate report')
+  .option('-t, --type "<string>"', 'Type cli/html')
+  .action((amount, options) => {
+    const event = (options.type !== 'cli')
+    event.report()
+  })
 
 // Parse the arguments from process.argv
 program.parse()
-
-const options = program.opts()
