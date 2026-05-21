@@ -17,7 +17,7 @@ const usage = (msg = description) => {
 program
   .name('fire-cli') // Set the name of the program
   .description(description) // Set the description
-  .version('0.0.1', '-v, --version', 'output the current version');
+  .version('0.0.1', '-v, --version', 'output the current version')
 
 program
   .command('add')

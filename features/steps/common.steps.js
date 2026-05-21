@@ -7,14 +7,19 @@ import child_process from 'node:child_process'
 import { Expense, Income } from '#models/money_event.js'
 const exec = promisify(child_process.exec)
 
-Given(/user executes tool with (.*?) option/, async function (action) {
+Given(/user executes tool with "(.*?)" option/, async function (action) {
   let cmd
   switch (action) {
     case 'add':{
       cmd = (this.category === null) ?
         `fire-cli add "${this.amount}"` :
         `fire-cli add "${this.amount}" -c ${this.category}`
-      const resp = await exec(cmd)
+      this.resp = await exec(cmd)
+      break
+    }
+    case '--version':{
+      cmd = `fire-cli ${action}`
+      this.resp = await exec(cmd)
       break
     }
     default:{
@@ -37,7 +42,15 @@ When('the command is processed', function () {
   return 'pending'
 })
 
+When('version is printed in the stdout', function () {
+  assert(this.resp.stdout, `There was a problem getting version`)
+});
+
 Then(/output is "(.*?)"/, function (match) {
   const event = this.isIncome ? new Income(this.amount, this.category) : new Expense(this.amount, this.category)
   assert(event.save() === match, `There was a problem saving the event ${JSON.stringify(event)}`)
+})
+
+Then(/version is "(.*?)"/, function (version) {
+  assert(this.resp.stdout.replace('\n','') == version, `There was a problem getting version`)
 })
