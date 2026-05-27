@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "imports": {
-    "#models/*.js": "./app/models/*.js"
+    "#models/*.js": "./app/models/*.js",
+    "#utils/*.js": "./app/utils/*.js",
+    "#data/*.js": "./data/*.js"
   },
   "bin": {
     "fire-cli": "bin/cmd.js"

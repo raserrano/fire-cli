@@ -9,9 +9,9 @@ const description = 'Tool to track income/spending for FIRE chart'
 // TODO: see if I cn read package.json to read app name and version
 
 // Log the usage of the command to the console
-const usage = (msg = description) => {
-  console.log(`\n${msg}\n`)
-}
+// const usage = (msg = description) => {
+//   console.log(`\n${msg}\n`)
+// }
 
 // Create a new Program
 program
