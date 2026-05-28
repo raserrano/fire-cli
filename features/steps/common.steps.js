@@ -62,26 +62,14 @@ Given(/user wants to (encrypt|decrypt) data file/, function (action) {
 })
 
 Then(/user is asked for password to (encrypt|decrypt) file/, function (action) {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  })
-
-  const askQuestion = (query) => new Promise(resolve => rl.question(query, resolve));
-
-  (async () => {
-    const name = await askQuestion('What is your name? ')
-    console.log(`Hello, ${name}!`)
-    rl.close()
-  })()
-  console.log(`I'm going to ${action} the data file`)
-  // this.password =
+  this.password = 'secret123'
 })
 
 Then(/the file is (encrypted|decrypted) with the given password/, function (action) {
-  console.log(`I'm going to ${action} the data file`)
+  console.log(`The password is ${this.password}`)
+  encrypt.encryptFile('./data/test.enc', this.password)
 })
 
 Then('data is loaded into memory\\/session', function () {
-  this.data = encrypt.decryptFile(this.password)
+  this.data = encrypt.decryptFile('./data/test.enc.enc', this.password)
 })

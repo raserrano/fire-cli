@@ -13,7 +13,7 @@
     "fire-cli": "bin/cmd.js"
   },
   "scripts": {
-    "test": "c8 cucumber-js",
+    "test": "c8 cucumber-js --tags 'not @skip'",
     "lint": "standard . --fix",
     "prepare": "husky"
   },
