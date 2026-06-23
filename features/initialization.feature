@@ -11,3 +11,9 @@ Scenario: User checks version of the tool
 	Given user executes tool with "--version" option
 	When version is printed in the stdout
 	Then version is "0.0.1"
+
+@mvp @skip
+Scenario: User sexecutes set up
+	Given user executes tool with "init" option
+	When version is printed in the stdout
+	Then version is "0.0.1"
