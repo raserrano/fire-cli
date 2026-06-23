@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 import { Command } from 'commander'
+import inquirer from 'inquirer'
+
 // import { update, add, listCategories, listCategoryItems } from "../src/utils.js";
 import { Expense } from '#models/money_event.js'
+import * as encrypt from '#utils/encrypt.js'
 
 // Create a new Command Program
 const program = new Command()
@@ -28,7 +31,30 @@ program
     const event = (options.category !== null)
       ? new Expense(amount, options.category)
       : new Expense(amount)
-    event.save()
+    event.save();
+  })
+
+program
+  .command('encrypt')
+  .description('Save data to file and encrypt it')
+  .argument('<string>', 'File path')
+  .action(async (path) => {
+    // Await the prompt to ensure the script waits for input
+    const answers = await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'path',
+        message: 'Enter file path:',
+      },
+      {
+        type: 'password',
+        name: 'password',
+        message: 'Enter the encryption key:',
+        validate: (input) => input.length >= 8 ? true : 'Name must be at least 8 characters',
+      }
+    ]);
+
+    encrypt.encryptFile(answers.path, answers.password)
   })
 
 program

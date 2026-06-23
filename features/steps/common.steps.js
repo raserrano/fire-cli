@@ -13,13 +13,23 @@ Given(/user executes tool with "(.*?)" option/, async function (action) {
   let cmd
   switch (action) {
     case 'add':{
-      cmd = (this.category === null)
+      cmd = (this.category === undefined)
         ? `fire-cli add "${this.amount}"`
         : `fire-cli add "${this.amount}" -c ${this.category}`
       this.resp = await exec(cmd)
       break
     }
     case '--version':{
+      cmd = `fire-cli ${action}`
+      this.resp = await exec(cmd)
+      break
+    }
+    case 'encrypt':{
+      cmd = `fire-cli ${action}`
+      this.resp = await exec(cmd)
+      break
+    }
+    case 'decrypt':{
       cmd = `fire-cli ${action}`
       this.resp = await exec(cmd)
       break
@@ -48,9 +58,10 @@ When('version is printed in the stdout', function () {
   assert(this.resp.stdout, 'There was a problem getting version')
 })
 
-Then(/output is "(.*?)"/, function (match) {
+Then(/output is "(.*?)"/, async function (match) {
   const event = this.isIncome ? new Income(this.amount, this.category) : new Expense(this.amount, this.category)
-  assert(event.save() === match, `There was a problem saving the event ${JSON.stringify(event)}`)
+  let result = await event.save()
+  assert(result === match, `There was a problem saving the event ${JSON.stringify(event)}`)
 })
 
 Then(/version is "(.*?)"/, function (version) {
@@ -66,10 +77,13 @@ Then(/user is asked for password to (encrypt|decrypt) file/, function (action) {
 })
 
 Then(/the file is (encrypted|decrypted) with the given password/, function (action) {
-  console.log(`The password is ${this.password}`)
-  encrypt.encryptFile('./data/test.enc', this.password)
+  if (action === 'encrypted') {
+    encrypt.encryptFile('./data/test.enc', this.password)
+  } else {
+    this.data = encrypt.decryptFile('./data/test.enc.enc', this.password)
+  }
 })
 
 Then('data is loaded into memory\\/session', function () {
-  this.data = encrypt.decryptFile('./data/test.enc.enc', this.password)
+  console.log(this.data)
 })
