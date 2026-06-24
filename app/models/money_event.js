@@ -1,6 +1,6 @@
 import { Low } from 'lowdb'
 import { JSONFile } from 'lowdb/node'
-import { scheduler } from 'node:timers/promises';
+// import { scheduler } from 'node:timers/promises'
 
 class MoneyEvent {
   constructor (amount, type, date, category, file, data, tags = []) {
@@ -29,11 +29,11 @@ class MoneyEvent {
     this.type = type
   }
 
-  getDate(){
+  getDate () {
     return this.date
   }
 
-  setDate(date){
+  setDate (date) {
     this.date = date
   }
 
@@ -54,6 +54,7 @@ class MoneyEvent {
   }
 
   async save () {
+    await this.db.read()
     const eventObj = {
       category: this.getCategory(),
       type: this.getType(),
@@ -61,27 +62,25 @@ class MoneyEvent {
       date: this.getDate(),
       tags: this.getTags()
     }
-    // console.log(`TO ADD:`,`\n${'-'.repeat(100)}`, JSON.stringify(eventObj))
     await this.db.read()
-    await this.db.update(({events})=>{
-      // console.log(events)
+    await this.db.update(({ events }) => {
       events.push(eventObj)
     })
-    await scheduler.wait(2000); // Wait one second before continuing
+    // await scheduler.wait(2000)
+
     await this.db.write()
     return `${this.type.toLowerCase()} registered for category '${this.getCategory()}'`
-
   }
 }
 
 export class Expense extends MoneyEvent {
-  constructor (amount, category = 'Default', file='data/events.json', data={ events: [] }, tags = []) {
+  constructor (amount, category = 'Default', file = 'data/events.json', data = { events: [] }, tags = []) {
     super(amount, 'Expense', new Date(), category, file, data, tags)
   }
 }
 
 export class Income extends MoneyEvent {
-  constructor (amount, category = 'Default', file='data/events.json', data={ events: [] }, tags = []) {
+  constructor (amount, category = 'Default', file = 'data/events.json', data = { events: [] }, tags = []) {
     super(amount, 'Income', new Date(), category, file, data, tags)
   }
 }
