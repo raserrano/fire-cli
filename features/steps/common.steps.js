@@ -41,11 +41,11 @@ Given(/user executes tool with "(.*?)" option/, async function (action) {
 })
 
 Given(/user wants to add an (income|expense)/, function (type) {
-  this.amount = type === 'income' ? 100 : -100
+  this.amount = type === 'income' ? 120 : -100
   this.isIncome = type === 'income'
 })
 
-Given('a the category is {string}', function (category) {
+Given('the category is {string}', function (category) {
   this.category = category
 })
 

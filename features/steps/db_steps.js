@@ -10,6 +10,7 @@ Given('there is no file present', async function () {
 
 Given('existing file is empty', async function () {
   this.obj = new Income(this.amount, this.category, 'data/does-exist.json', {})
+  console.log(this.obj)
 });
 
 Given('file has incorrect structure', async function () {
@@ -21,5 +22,5 @@ Given(/user wants to add a transaction/, async function () {
 })
 
 Given(/error is displayed/, async function () {
-  console.log(this.result, this.obj)
+  console.log(this.result, JSON.stringify(this.obj))
 })

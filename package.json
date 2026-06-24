@@ -13,7 +13,7 @@
     "fire-cli": "bin/cmd.js"
   },
   "scripts": {
-    "test": "c8 cucumber-js --tags 'not @skip'",
+    "test": "c8 cucumber-js --tags 'not @skip' --format pretty --format-options '{\"pretty\":{\"useStatusIcon\":true}}'",
     "lint": "standard . --fix",
     "prepare": "husky"
   },
