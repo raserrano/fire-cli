@@ -1,5 +1,6 @@
 import { Low } from 'lowdb'
 import { JSONFile } from 'lowdb/node'
+import { scheduler } from 'node:timers/promises';
 
 class MoneyEvent {
   constructor (amount, type, date, category, file, data, tags = []) {
@@ -60,7 +61,13 @@ class MoneyEvent {
       date: this.getDate(),
       tags: this.getTags()
     }
-    await this.db.update(({events})=>events.push(eventObj))
+    // console.log(`TO ADD:`,`\n${'-'.repeat(100)}`, JSON.stringify(eventObj))
+    await this.db.read()
+    await this.db.update(({events})=>{
+      // console.log(events)
+      events.push(eventObj)
+    })
+    await scheduler.wait(2000); // Wait one second before continuing
     await this.db.write()
     return `${this.type.toLowerCase()} registered for category '${this.getCategory()}'`
 

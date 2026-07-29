@@ -59,9 +59,7 @@ When('version is printed in the stdout', function () {
 })
 
 Then(/output is "(.*?)"/, async function (match) {
-  const event = this.isIncome ? new Income(this.amount, this.category) : new Expense(this.amount, this.category)
-  let result = await event.save()
-  assert(result === match, `There was a problem saving the event ${JSON.stringify(event)}`)
+  assert(this.resp.stdout.trim() === match, 'There was a problem saving the event')
 })
 
 Then(/version is "(.*?)"/, function (version) {
