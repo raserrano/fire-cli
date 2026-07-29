@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 import { Command } from 'commander'
-import inquirer from 'inquirer'
 
 // import { update, add, listCategories, listCategoryItems } from "../src/utils.js";
-import { Expense } from '#models/money_event.js'
+import { Income, Expense } from '#models/money_event.js'
 import * as encrypt from '#utils/encrypt.js'
 
 // Create a new Command Program
@@ -27,11 +26,17 @@ program
   .description('Add money income/spend and category')
   .argument('<number>', 'Amount to add as income')
   .option('-c, --category <string>', 'Category')
-  .action((amount, options) => {
-    const event = (options.category !== null)
+  .action(async (amount, options) => {
+    let event = (options.category !== null)
       ? new Expense(amount, options.category)
       : new Expense(amount)
-    event.save();
+    if (amount > 0) {
+      event = (options.category !== null)
+        ? new Income(amount, options.category)
+        : new Income(amount)
+    }
+    const out = await event.save()
+    console.log(out)
   })
 
 program
@@ -44,15 +49,15 @@ program
       {
         type: 'input',
         name: 'path',
-        message: 'Enter file path:',
+        message: 'Enter file path:'
       },
       {
         type: 'password',
         name: 'password',
         message: 'Enter the encryption key:',
-        validate: (input) => input.length >= 8 ? true : 'Name must be at least 8 characters',
+        validate: (input) => input.length >= 8 ? true : 'Name must be at least 8 characters'
       }
-    ]);
+    ])
 
     encrypt.encryptFile(answers.path, answers.password)
   })
