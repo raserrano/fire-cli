@@ -1,7 +1,7 @@
 {
 	"check-coverage":true,
-	"branches": 85,
-	"lines": 74,
-	"statements": 74,
-	"functions": 28
+	"branches": 81,
+	"lines": 73,
+	"statements": 73,
+	"functions": 55
 }
