@@ -13,7 +13,9 @@
     "fire-cli": "bin/cmd.js"
   },
   "scripts": {
-    "test": "c8 cucumber-js --tags 'not @skip' --format pretty --format-options '{\"pretty\":{\"useStatusIcon\":true}}'",
+    "test": "cucumber-js --tags 'not @skip' --format pretty --format-options '{\"pretty\":{\"useStatusIcon\":true}}'",
+    "coverage": "c8 npm test",
+    "coverage:html": "c8 report --reporter html",
     "lint": "standard . --fix",
     "prepare": "husky"
   },

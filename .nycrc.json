@@ -3,5 +3,6 @@
 	"branches": 81,
 	"lines": 73,
 	"statements": 73,
-	"functions": 55
+	"functions": 55,
+	"exclude":["features/**"]
 }
