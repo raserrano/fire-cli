@@ -36,7 +36,7 @@
   },
   "homepage": "https://github.com/raserrano/fire-cli#readme",
   "dependencies": {
-    "@cucumber/cucumber": "^13.2.0",
+    "@cucumber/cucumber": "^13.2.1",
     "commander": "^15.0.0",
     "commitlint": "^21.2.1",
     "lowdb": "^7.0.1"
@@ -47,7 +47,7 @@
     "c8": "^12.0.0",
     "chai": "^6.2.2",
     "husky": "^9.1.7",
-    "npm-check-updates": "^23.0.0",
+    "npm-check-updates": "^23.0.1",
     "standard": "^17.1.2"
   }
 }
