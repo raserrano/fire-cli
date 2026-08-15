@@ -71,5 +71,14 @@ program
     event.report()
   })
 
+program
+  .command('balance')
+  .description('Calculate account balance')
+  .action(async (amount, options) => {
+    const event = new Income(0)
+    const out = await event.balance()
+    console.log(out)
+  })
+
 // Parse the arguments from process.argv
 program.parse()

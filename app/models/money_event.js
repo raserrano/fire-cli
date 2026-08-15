@@ -71,6 +71,22 @@ class MoneyEvent {
     await this.db.write()
     return `${this.type.toLowerCase()} registered for category '${this.getCategory()}'`
   }
+
+  async balance () {
+    await this.db.read()
+    const { events } = await this.db.data
+    // console.log(events)
+    let balance = 0
+    events.map(event => {
+      // console.log(event.amount, parseFloat(event.amount))
+      const pAmount = parseFloat(event.amount)
+      if (Number.isFinite(pAmount)) {
+        balance += pAmount
+      }
+      // console.log(`Balance is ${balance}`)
+    })
+    return `Account balance is ${balance}`
+  }
 }
 
 export class Expense extends MoneyEvent {
