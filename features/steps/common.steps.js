@@ -98,7 +98,8 @@ Given('user wants to see balance', function () {
   this.balance = 0
 })
 
-Given(/there is an (income|expense) of (.*?)/, async function (type, value) {
+Given(/there is an (income|expense) of (.*)/, async function (type, value) {
   const amount = (type === 'income') ? value : value * -1
+  console.log(`Trying to add ${type} of ${value} as ${amount}`)
   this.resp = await exec(`fire-cli add "${amount}"`)
 })
