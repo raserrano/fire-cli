@@ -34,6 +34,11 @@ Given(/user executes tool with "(.*?)" option/, async function (action) {
       this.resp = await exec(cmd)
       break
     }
+    case 'balance':{
+      cmd = `fire-cli ${action}`
+      this.resp = await exec(cmd)
+      break
+    }
     default:{
 
     }
@@ -59,7 +64,10 @@ When('version is printed in the stdout', function () {
 })
 
 Then(/output is "(.*?)"/, async function (match) {
-  assert(this.resp.stdout.trim() === match, 'There was a problem saving the event')
+  assert(
+    this.resp.stdout.trim() === match,
+    `Fail to match: ${match} instead received ${this.resp.stdout.trim()}`
+  )
 })
 
 Then(/version is "(.*?)"/, function (version) {
@@ -84,4 +92,13 @@ Then(/the file is (encrypted|decrypted) with the given password/, function (acti
 
 Then('data is loaded into memory\\/session', function () {
   console.log(this.data)
+})
+
+Given('user wants to see balance', function () {
+  this.balance = 0
+})
+
+Given(/there is an (income|expense) of (.*?)/, async function (type, value) {
+  const amount = (type === 'income') ? value : value * -1
+  this.resp = await exec(`fire-cli add "${amount}"`)
 })
