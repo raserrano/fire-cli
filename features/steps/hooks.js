@@ -33,7 +33,6 @@ Before({ tags: '@db' }, async function () {
 })
 
 Before({ tags: '@db' }, async function () {
-  console.log('Before everything')
   const file1 = 'data/does-not-exist.json'
   const fileExist1 = await checkFile(file1)
   if (fileExist1) {

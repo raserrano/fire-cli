@@ -80,5 +80,14 @@ program
     console.log(out)
   })
 
+program
+  .command('list')
+  .description('Calculate account list')
+  .action(async (amount, options) => {
+    const event = new Income(0)
+    const out = await event.list()
+    console.log(out)
+  })
+
 // Parse the arguments from process.argv
 program.parse()

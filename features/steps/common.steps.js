@@ -39,6 +39,11 @@ Given(/user executes tool with "(.*?)" option/, async function (action) {
       this.resp = await exec(cmd)
       break
     }
+    case 'list':{
+      cmd = `fire-cli ${action}`
+      this.resp = await exec(cmd)
+      break
+    }
     default:{
 
     }
@@ -100,6 +105,6 @@ Given('user wants to see balance', function () {
 
 Given(/there is an (income|expense) of (.*)/, async function (type, value) {
   const amount = (type === 'income') ? value : value * -1
-  console.log(`Trying to add ${type} of ${value} as ${amount}`)
+  // console.log(`Trying to add ${type} of ${value} as ${amount}`)
   this.resp = await exec(`fire-cli add "${amount}"`)
 })
