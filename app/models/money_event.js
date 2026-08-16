@@ -90,15 +90,9 @@ class MoneyEvent {
 
   async list () {
     await this.db.read()
-    const { events } = await this.db.data
-    // console.log(events)
-    const list = []
-    events.map(event => {
-      // console.log(event)
-      // console.log(event.amount, parseFloat(event.amount))
-      list.push(`${event.category} | ${event.type} | ${event.amount}`)
-    })
-    return list
+    let { events } = await this.db.data
+    events.forEach(e=> delete e.date)
+    return events
   }
 }
 
