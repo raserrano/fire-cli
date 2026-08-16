@@ -108,3 +108,15 @@ Given(/there is an (income|expense) of (.*)/, async function (type, value) {
   // console.log(`Trying to add ${type} of ${value} as ${amount}`)
   this.resp = await exec(`fire-cli add "${amount}"`)
 })
+
+When(/selects the (.*?) option of the list/, function (pos) {
+  console.log(`Position to display ${pos}`)
+});
+
+
+Then(/output should match/, async function (match) {
+  assert(
+    this.resp.stdout.trim() === match,
+    `Fail to match: ${match} instead received ${this.resp.stdout.trim()}`
+  )
+})
