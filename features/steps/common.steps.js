@@ -76,7 +76,7 @@ Then(/output is "(.*?)"/, async function (match) {
 })
 
 Then(/version is "(.*?)"/, function (version) {
-  assert(this.resp.stdout.replace('\n', '') == version, 'There was a problem getting version')
+  assert(this.resp.stdout.replace('\n', '') === version, 'There was a problem getting version')
 })
 
 Given(/user wants to (encrypt|decrypt) data file/, function (action) {
@@ -109,10 +109,9 @@ Given(/there is an (income|expense) of (.*)/, async function (type, value) {
   this.resp = await exec(`fire-cli add "${amount}"`)
 })
 
-When(/selects the (.*?) option of the list/, function (pos) {
-  console.log(`Position to display ${pos}`)
-});
-
+When(/selects the (.*?) option of the list/, async function (pos) {
+  this.resp = await exec(`fire-cli show "${pos}"`)
+})
 
 Then(/output should match/, async function (match) {
   assert(

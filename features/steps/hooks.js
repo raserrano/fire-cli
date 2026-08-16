@@ -1,4 +1,4 @@
-import { BeforeAll, Before, After, AfterAll } from '@cucumber/cucumber'
+import { BeforeAll, Before } from '@cucumber/cucumber'
 
 import { unlink, access } from 'node:fs/promises'
 
@@ -21,14 +21,14 @@ BeforeAll(async function () {
 })
 
 // AfterAll(function () {
-// 	console.log('After everything')
+//   console.log('After everything')
 // })
 
 Before({ tags: '@db' }, async function () {
   const file = 'data/events.json'
   const fileExist = await checkFile(file)
   if (fileExist) {
-	  await unlink(file)
+    await unlink(file)
   }
 })
 
@@ -41,6 +41,6 @@ Before({ tags: '@db' }, async function () {
   // const file2 = 'data/does-exist.json'
   // const fileExist2 = await checkFile(file2)
   // if(fileExist2){
-  // 	await unlink(file2)
+  //  await unlink(file2)
   // }
 })
