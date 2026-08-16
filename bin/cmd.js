@@ -89,15 +89,14 @@ program
     console.table(out)
   })
 
-
 program
   .command('show')
   .description('Display transaction by position')
   .argument('<number>', 'Transaction/position to display')
   .action(async (amount, options) => {
     const event = new Income(0)
-    const out = await event.list()
-    console.log(out)
+    const out = await event.show(amount)
+    console.table(out)
   })
 
 // Parse the arguments from process.argv

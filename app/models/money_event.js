@@ -90,9 +90,16 @@ class MoneyEvent {
 
   async list () {
     await this.db.read()
-    let { events } = await this.db.data
-    events.forEach(e=> delete e.date)
+    const { events } = await this.db.data
+    events.forEach(e => delete e.date)
     return events
+  }
+
+  async show (pos) {
+    await this.db.read()
+    const { events } = await this.db.data
+    delete events[pos].date
+    return events[pos]
   }
 }
 
