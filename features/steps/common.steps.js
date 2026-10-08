@@ -44,6 +44,11 @@ Given(/user executes tool with "(.*?)" option/, async function (action) {
       this.resp = await exec(cmd)
       break
     }
+    case 'clean':{
+      cmd = `fire-cli ${action}`
+      this.resp = await exec(cmd)
+      break
+    }
     default:{
 
     }

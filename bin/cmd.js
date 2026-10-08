@@ -99,5 +99,14 @@ program
     console.table(out)
   })
 
+program
+  .command('clean')
+  .description('Clean all transactions')
+  .action(async () => {
+    const event = new Income(0)
+    const out = await event.clean()
+    console.log(out)
+  })
+
 // Parse the arguments from process.argv
 program.parse()
