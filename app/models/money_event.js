@@ -1,5 +1,6 @@
 import { Low } from 'lowdb'
 import { JSONFile } from 'lowdb/node'
+import { DB } from './db.js'
 // import { scheduler } from 'node:timers/promises'
 
 class MoneyEvent {
@@ -11,6 +12,7 @@ class MoneyEvent {
     this.tags = tags
     const adapter = new JSONFile(file)
     this.db = new Low(adapter, data)
+    this.db2 = new DB()
   }
 
   getAmount () {
@@ -100,6 +102,15 @@ class MoneyEvent {
     const { events } = await this.db.data
     delete events[pos].date
     return events[pos]
+  }
+
+  async clean () {
+    await this.db.read()
+    let { events } = await this.db.data
+    console.log(events)
+    events = {}
+    await this.db.write()
+    return 'NOpe'
   }
 }
 
