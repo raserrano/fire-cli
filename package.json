@@ -51,5 +51,8 @@
     "husky": "^9.1.7",
     "npm-check-updates": "^23.1.0",
     "standard": "^17.1.2"
+  },
+  "allowScripts": {
+    "husky@9.1.7": true
   }
 }
