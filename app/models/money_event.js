@@ -107,10 +107,9 @@ class MoneyEvent {
   async clean () {
     await this.db.read()
     let { events } = await this.db.data
-    console.log(events)
     events = {}
     await this.db.write()
-    return 'NOpe'
+    return 'All records removed'
   }
 }
 

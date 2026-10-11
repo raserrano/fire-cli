@@ -1,4 +1,4 @@
-@db @visuals
+@db @clean
 Feature: User can see list of transactions
   There is a working data file with proper structure
   Need to verify the file is present, is not empty.
